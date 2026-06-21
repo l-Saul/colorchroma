@@ -71,9 +71,11 @@ export default function Home() {
     const pickerRgb = hsvToRgb(hsv)
     const pickerHex = rgbToHex(pickerRgb.r, pickerRgb.g, pickerRgb.b)
 
-    // Start on a fresh random color every visit (after mount to avoid
-    // hydration mismatch with the static export).
+    // Start on a fresh random color every visit. This runs after mount on
+    // purpose: randomizing during render would mismatch the prerendered
+    // (static export) HTML during hydration.
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setHsv(randomHsv())
     }, [])
 

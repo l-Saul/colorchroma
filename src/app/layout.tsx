@@ -1,6 +1,4 @@
 import type { Metadata, Viewport } from 'next'
-// TypeScript may complain about side-effect CSS imports when no declarations exist.
-// @ts-ignore: Allow importing global CSS without type declarations
 import './globals.css'
 
 const SITE_URL = 'https://l-saul.github.io/colorconverter/'

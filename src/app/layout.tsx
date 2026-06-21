@@ -1,51 +1,72 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
+// TypeScript may complain about side-effect CSS imports when no declarations exist.
+// @ts-ignore: Allow importing global CSS without type declarations
 import './globals.css'
 
-const BASE_PATH = '/colorconverter'
+const SITE_URL = 'https://l-saul.github.io/colorconverter/'
+const TITLE = 'Chroma — Color Picker & Converter'
+const DESCRIPTION =
+    'A playful color studio to pick colors and convert between HEX and RGB instantly — with a live color wheel, smart paste and one-click copy.'
 
 export const metadata: Metadata = {
-    title: 'Color Converter',
-    description:
-        'Online tool to convert HEX colors to RGB quickly and accurately.',
+    metadataBase: new URL(SITE_URL),
+    title: {
+        default: TITLE,
+        template: '%s · Chroma',
+    },
+    description: DESCRIPTION,
+    applicationName: 'Chroma',
     authors: [{ name: 'Luis Henrique Engel Saul' }],
+    creator: 'Luis Henrique Engel Saul',
+    publisher: 'Luis Henrique Engel Saul',
+    category: 'technology',
     keywords: [
+        'Chroma',
+        'Color Picker',
         'Color Converter',
+        'Color Wheel',
         'HEX to RGB',
         'RGB to HEX',
+        'HEX color code',
+        'RGB color code',
         'Web Development',
-        'Design',
+        'Design Tools',
     ],
+    alternates: {
+        canonical: '/',
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+        },
+    },
     openGraph: {
-        title: 'Color Converter',
-        description:
-            'Convert HEX to RGB and RGB to HEX instantly.',
-        url: 'https://l-saul.github.io/colorconverter/',
-        siteName: 'Color Converter',
-        images: [`${BASE_PATH}/colorconverter1024x1024.png`],
+        title: TITLE,
+        description: DESCRIPTION,
+        url: SITE_URL,
+        siteName: 'Chroma',
         locale: 'en_US',
         type: 'website',
+        // OG image is auto-detected from src/app/opengraph-image.tsx
     },
-    icons: {
-        icon: [
-            {
-                url: `${BASE_PATH}/colorconverter32x32.png`,
-                sizes: '32x32',
-                type: 'image/png',
-            },
-            {
-                url: `${BASE_PATH}/colorconverter512x512.png`,
-                sizes: '512x512',
-                type: 'image/png',
-            },
-        ],
-        apple: [
-            {
-                url: `${BASE_PATH}/colorconverter180x180.png`,
-                sizes: '180x180',
-                type: 'image/png',
-            },
-        ],
+    twitter: {
+        card: 'summary_large_image',
+        title: TITLE,
+        description: DESCRIPTION,
+        creator: '@l-saul',
+        // Twitter image is auto-detected from src/app/twitter-image / opengraph-image
     },
+    // Favicon is auto-detected from src/app/icon.svg
+}
+
+export const viewport: Viewport = {
+    themeColor: '#030712',
+    colorScheme: 'dark',
 }
 
 export default function RootLayout({
@@ -55,7 +76,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className="bg-gray-900 text-white min-h-screen font-sans">
+            <body className="bg-gray-950 text-white min-h-screen font-sans antialiased">
                 {children}
             </body>
         </html>
